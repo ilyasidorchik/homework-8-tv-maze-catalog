@@ -3,7 +3,7 @@ import {
   showRequest,
   showSuccess,
   showFailure
-} from '../actions/show';
+} from '../actions/shows';
 import { handleActions } from 'redux-actions';
 
 const series = handleActions( {

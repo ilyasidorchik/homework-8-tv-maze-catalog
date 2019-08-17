@@ -8,9 +8,9 @@
 
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { showRequest } from '../../actions/show';
+import { showRequest } from '../../actions/shows';
 import styles from './ShowPage.module.css';
-import { getShow, getIsLoading, getError } from '../../selectors/show';
+import { getShow, getIsLoading, getError } from '../../selectors/shows';
 
 class ShowPage extends PureComponent {
     componentDidMount() {
