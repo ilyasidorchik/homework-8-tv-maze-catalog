@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import search from './search';
+import search from './search.js';
 import shows from './shows';
 
 // Вам необходимо реализовать search и shows редьюсеры.
