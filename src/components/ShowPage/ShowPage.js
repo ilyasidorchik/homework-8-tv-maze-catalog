@@ -14,8 +14,8 @@ import { getShow, getIsLoading, getError } from '../../selectors/shows';
 
 class ShowPage extends PureComponent {
     componentDidMount() {
-        const { showRequest } = this.props;
-        showRequest();
+        const { showRequest, match: { params } } = this.props;
+        showRequest(params.id);
     }
 
     render() {
