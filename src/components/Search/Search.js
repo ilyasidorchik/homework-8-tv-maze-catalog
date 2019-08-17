@@ -8,6 +8,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { searchRequest } from '../../actions/actions';
 import { getSeries, getIsLoading, getError } from '../../selectors/search.js';
+import ShowPreview from '../ShowPreview';
 import styles from './Search.module.css';
 
 class Search extends PureComponent {
