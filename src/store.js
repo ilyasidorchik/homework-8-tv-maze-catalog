@@ -3,16 +3,19 @@ import { searchMiddleware } from './middlewares/searchMiddleware';
 import { showMiddleware } from './middlewares/showMiddleware';
 import rootReducer from './reducers';
 
-const getStore = () => {
+const createAppStore = () => {
     const store = createStore(
         rootReducer,
         compose(
             applyMiddleware(searchMiddleware),
-            applyMiddleware(showMiddleware)
+            applyMiddleware(showMiddleware),
+            window.__REDUX_DEVTOOLS_EXTENSION__
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : noop => noop
         )
     );
 
     return store;
 };
 
-export default getStore;
+export default createAppStore;

@@ -10,7 +10,7 @@ import {
     showRequest,
     showSuccess,
     showFailure
-} from '../actions/shows.js';
+} from '../actions/shows';
 
 export const showMiddleware = store => next => action => {
     if (action.type === showRequest.toString()) {
@@ -27,5 +27,5 @@ export const showMiddleware = store => next => action => {
             });
     }
 
-    return next(action);
+    next(action);
 };

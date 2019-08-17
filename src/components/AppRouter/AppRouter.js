@@ -14,7 +14,7 @@ class AppRouter extends PureComponent {
             <div className="App">
                 <Switch>
                     <Route path="/" component={Search} exact />
-                    <Route path="/shows:id" component={ShowPage} />
+                    <Route path="/shows/:id" component={ShowPage} />
                     <Redirect to="/" />
                 </Switch>
             </div>

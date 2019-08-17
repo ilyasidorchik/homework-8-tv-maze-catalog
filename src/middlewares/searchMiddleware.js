@@ -11,7 +11,7 @@ import {
     searchRequest,
     searchSuccess,
     searchFailure
-} from '../actions/search.js';
+} from '../actions/search';
 
 export const searchMiddleware = store => next => action => {
     if (action.type === searchRequest.toString()) {
@@ -20,6 +20,7 @@ export const searchMiddleware = store => next => action => {
             mode: 'cors'
         })
             .then(response => response.json())
+            .then(shows => shows.map(show => show.show))
             .then(data => {
                 store.dispatch(searchSuccess(data))
             })
@@ -28,5 +29,5 @@ export const searchMiddleware = store => next => action => {
             });
     }
 
-    return next(action);
+    next(action);
 };

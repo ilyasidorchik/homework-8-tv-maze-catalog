@@ -11,13 +11,13 @@ export default class ShowPreview extends PureComponent {
         const { id, name, image, summary } = preview;
 
         return (
-            <div className={styles.container + 't-preview'}>
+            <div className={styles.container + ' t-preview'}>
                 <div>
                     <Link to={'/shows/' + id} className="t-link">{name}</Link>                
 
                     {image && <img src={image} alt={name} />}
                 </div>
-                <div><p dangerouslySetInnerHTML={{ __html: summary }} /></div>
+                <div dangerouslySetInnerHTML={{ __html: summary }} />
             </div>
         );
     }

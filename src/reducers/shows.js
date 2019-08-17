@@ -6,7 +6,7 @@ import {
 } from '../actions/shows';
 import { handleActions } from 'redux-actions';
 
-const series = handleActions( {
+const show = handleActions( {
     [showRequest]: () => [],
     [showSuccess]: (_state, action) => action.payload
   }, []);
@@ -23,7 +23,7 @@ const series = handleActions( {
   }, null);
 
   export default combineReducers({
-    series,
+    show,
     isLoading,
     error
   });

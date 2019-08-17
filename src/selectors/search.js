@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
 
 export const getSeries = createSelector(
-    state => state.series,
-    (series) => series.map(({ id, name, image: { original }, summary }) => ({
+    state => state.search.series,
+    (series) => series.map(({ id, name, image, summary }) => ({
         id,
         name,
-        image: original,
+        image: image && image.medium,
         summary
     }))
 );
 
-export const getIsLoading = (state) => state.isLoading;
+export const getIsLoading = (state) => state.search.isLoading;
 
-export const getError = (state) => state.error;
+export const getError = (state) => state.search.error;

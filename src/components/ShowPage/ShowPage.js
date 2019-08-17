@@ -14,32 +14,32 @@ import { getShow, getIsLoading, getError } from '../../selectors/shows';
 
 class ShowPage extends PureComponent {
     componentDidMount() {
-        const { showRequest, match: { params } } = this.props;
-        showRequest(params.id);
+        const { showRequest, match: { params: { id } } } = this.props;
+        showRequest(id);
     }
 
     render() {
         const { show, isLoading, error } = this.props;
-        const { name, image, summary, persons } = show;
+        const { name, image, summary, _embedded } = show;
 
         if (isLoading) return <p>Данные загружаются...</p>;
         if (error) return <div>Произошла сетевая ошибка</div>;
         return (
             <div>
                 <p>{name}</p>
-                {image && <img src={image} alt={name} />}
-                <div>
-                    <p dangerouslySetInnerHTML={{ __html: summary }} />
+                {image && <img src={image.medium} alt={name} />}
+                <div dangerouslySetInnerHTML={{ __html: summary }} />
+
+                <div className={styles.cast}>
+                    {_embedded && 
+                        _embedded.cast.map(({ person: { id: personId, name, image }, character: { id: characterId } }) => (
+                            <div className="t-person" key={characterId + '_' + personId}>
+                                <p>{name}</p>
+                                {image && <img src={image.medium} alt={name} />}
+                            </div>
+                        ))
+                    }
                 </div>
-                {persons.length > 0
-                && <div className={styles.cast}>
-                    {persons.map((person) => (
-                        <div class="t-person">
-                            <p>{person.name}</p>
-                            {person.image && <img src={person.image} alt={person.name} />}
-                        </div>
-                    ))}
-                </div>}
             </div>
         );
     }
