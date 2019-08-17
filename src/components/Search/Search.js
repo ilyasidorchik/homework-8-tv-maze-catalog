@@ -20,10 +20,11 @@ class Search extends PureComponent {
         });
     };
 
-    handleSubmit = (e) => {
+    handleSearch = () => {
         const { searchRequest } = this.props;
+        const { inputValue } = this.state;
         
-        searchRequest();
+        searchRequest(inputValue);
 
         this.setState({
             inputValue: ''
@@ -31,18 +32,23 @@ class Search extends PureComponent {
     };
 
     render() {
-        const { search, inputValue } = this.state;
+        const { inputValue } = this.state;
+        const { series, isLoading, error } = this.props;
 
+        if (isLoading) return <p>Данные загружаются...</p>;
+        if (error) return <p>Произошла сетевая ошибка</p>;
         return (
             <div>
                 <div className={styles.previewList}>
                     <input className={styles.input + ' t-input'} placeholder="Название сериала" value={inputValue} onChange={this.handleInputChange} />
                     <div className={styles.buttonWrapper}>
-                        <button className={styles.button + ' t-search-button'} onClick={this.handleSubmit}>Найти</button>
+                        <button className={styles.button + ' t-search-button'} onClick={this.handleSearch}>Найти</button>
                     </div>
                 </div>
                 <div className={styles.searchPanel + ' t-search-result'}>
-                    <ShowPreview />
+                    {series.map(item => (
+                        <ShowPreview preview={item} key={item.id} />
+                    ))}
                 </div>
             </div>
         );
@@ -50,7 +56,9 @@ class Search extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    search: state.search
+    series: getSeries(state),
+    isLoading: getIsLoading(state),
+    error: getError(state)
 });
 
 const mapDispatchToProps = { searchRequest };
