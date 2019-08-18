@@ -1,4 +1,22 @@
-export const getShow = (state) => state.shows.show;
+import { createSelector } from 'reselect';
+
+export const getShow = createSelector(
+    state => state.shows.show,
+    (({ id, name, image, summary, _embedded }) => ({
+        id,
+        name,
+        image: image && image.medium,
+        summary,
+        actors: _embedded
+                && _embedded.cast.map(({ person: { id: personId, name, image: { medium } },
+                                         character: { id: characterId } }) => ({
+            characterId,
+            personId,
+            name,
+            image: medium
+        }))
+    }))
+);
 
 export const getIsLoading = (state) => state.shows.isLoading;
 
