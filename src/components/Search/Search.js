@@ -27,10 +27,6 @@ class Search extends PureComponent {
         const { inputValue } = this.state;
         
         searchRequest(inputValue);
-
-        // this.setState({
-        //     inputValue: ''
-        // });
     };
 
     render() {
