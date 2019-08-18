@@ -8,12 +8,12 @@ export const getShow = createSelector(
         image: image && image.medium,
         summary,
         actors: _embedded
-                && _embedded.cast.map(({ person: { id: personId, name, image: { medium } },
+                && _embedded.cast.map(({ person: { id: personId, name, image },
                                          character: { id: characterId } }) => ({
             characterId,
             personId,
             name,
-            image: medium
+            image: image && image.medium
         }))
     }))
 );
