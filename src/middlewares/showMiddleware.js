@@ -11,14 +11,11 @@ import {
     showSuccess,
     showFailure
 } from '../actions/shows';
+import { show } from '../api';
 
 export const showMiddleware = store => next => action => {
     if (action.type === showRequest.toString()) {
-        fetch(`http://api.tvmaze.com/shows/${action.payload}?embed=cast`, {
-            method: 'GET',
-            mode: 'cors'
-        })
-            .then(response => response.json())
+        show(action.payload)
             .then(data => {
                 store.dispatch(showSuccess(data))
             })

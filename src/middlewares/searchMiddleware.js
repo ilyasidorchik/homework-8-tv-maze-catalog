@@ -12,15 +12,11 @@ import {
     searchSuccess,
     searchFailure
 } from '../actions/search';
+import { search } from '../api';
 
 export const searchMiddleware = store => next => action => {
     if (action.type === searchRequest.toString()) {
-        fetch(`http://api.tvmaze.com/search/shows?q=${action.payload}`, {
-            method: 'GET',
-            mode: 'cors'
-        })
-            .then(response => response.json())
-            .then(shows => shows.map(show => show.show))
+        search(action.payload)
             .then(data => {
                 store.dispatch(searchSuccess(data))
             })
